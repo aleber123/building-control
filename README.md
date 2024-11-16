@@ -4,7 +4,6 @@
   <img src="https://img.shields.io/badge/Frontend-React-blue">
   <img src="https://img.shields.io/badge/Backend-Node.js-green">
   <img src="https://img.shields.io/badge/Database-MySQL-yellow">
-  <img src="https://img.shields.io/badge/License-MIT-lightgrey">
 </p>
 
 <p align="center">A full-stack application to manage building data, including adding, editing, and deleting buildings. The backend supports CRUD operations and stores data in a MySQL database, while the frontend provides a sleek UI for user interactions.</p>
@@ -124,16 +123,63 @@ npm run dev
 <p><strong>Run Unit Tests:</strong></p>
 <pre><code>npx jest</code></pre>
 
----
-
-<h2>🤝 Contributing</h2>
+<h3>Manual API Testing with Postman</h3>
+<p>Postman is used to manually test the API endpoints. Follow these steps to test the API:</p>
 <ol>
-  <li>Fork the repository.</li>
-  <li>Create a new branch: <code>git checkout -b feature/AmazingFeature</code></li>
-  <li>Commit your changes: <code>git commit -m "Add some AmazingFeature"</code></li>
-  <li>Push to the branch: <code>git push origin feature/AmazingFeature</code></li>
-  <li>Open a pull request.</li>
+  <li>Download and install <a href="https://www.postman.com/downloads/" target="_blank">Postman</a>.</li>
+  <li>Start the backend server: <code>npm run dev</code>.</li>
+  <li>Open Postman and set the <strong>Base URL</strong> to <code>http://localhost:3001</code>.</li>
+  <li>Use the following endpoints to test the API:</li>
 </ol>
+
+<table>
+  <tr>
+    <th>Method</th>
+    <th>Endpoint</th>
+    <th>Description</th>
+    <th>Body (JSON)</th>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td><code>/buildings</code></td>
+    <td>Fetch all buildings</td>
+    <td><em>None</em></td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td><code>/buildings</code></td>
+    <td>Create a new building</td>
+    <td>
+      <pre><code>{
+  "name": "Building Name",
+  "temperature": 22.5,
+  "location": "Main Street",
+  "status": "Active"
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td><code>/buildings/:id</code></td>
+    <td>Update a building by ID</td>
+    <td>
+      <pre><code>{
+  "name": "Updated Building",
+  "temperature": 25,
+  "location": "Updated Location",
+  "status": "Inactive"
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td><code>/buildings/:id</code></td>
+    <td>Delete a building by ID</td>
+    <td><em>None</em></td>
+  </tr>
+</table>
+
+<p>Test each endpoint by setting the request type (GET, POST, PUT, DELETE), providing any necessary data, and clicking "Send" in Postman.</p>
 
 ---
 
