@@ -22,26 +22,44 @@ const EditBuildingForm: React.FC<EditBuildingFormProps> = ({ building, onBuildin
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="edit-building-form" onSubmit={handleSubmit}>
       <h2>Edit Building</h2>
       <label>
         Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </label>
       <label>
         Temperature:
-        <input type="number" value={temperature} onChange={(e) => setTemperature(Number(e.target.value))} />
+        <input
+          type="number"
+          value={temperature}
+          onChange={(e) => setTemperature(Number(e.target.value))}
+        />
       </label>
       <label>
         Location:
-        <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
       </label>
       <label>
         Status:
-        <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} />
+        <input
+          type="text"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+        />
       </label>
-      <button type="submit">Save Changes</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <div className="form-buttons">
+        <button type="submit" className="btn-primary">Save Changes</button>
+        <button type="button" className="btn-secondary" onClick={onCancel}>Cancel</button>
+      </div>
     </form>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { createBuilding } from '../services/api';
-import { Building } from '../types/types'; // Import the type
+import { Building } from '../types/types';
 
 interface BuildingFormProps {
-  onBuildingAdded: (newBuilding: Building) => void; // Accepts a Building object
+  onBuildingAdded: (newBuilding: Building) => void;
 }
 
 const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
@@ -15,8 +15,8 @@ const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newBuilding = { name, temperature: Number(temperature), location, status };
-    const savedBuilding = await createBuilding(newBuilding);  // This response includes the new ID
-    onBuildingAdded(savedBuilding);  // Pass the complete building object with ID back
+    const savedBuilding = await createBuilding(newBuilding);
+    onBuildingAdded(savedBuilding);
     setName('');
     setTemperature('');
     setLocation('');
@@ -32,7 +32,11 @@ const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
       </label>
       <label>
         Temperature:
-        <input type="number" value={temperature} onChange={(e) => setTemperature(e.target.valueAsNumber)} />
+        <input
+          type="number"
+          value={temperature}
+          onChange={(e) => setTemperature(e.target.valueAsNumber)}
+        />
       </label>
       <label>
         Location:
@@ -42,7 +46,7 @@ const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
         Status:
         <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} />
       </label>
-      <button type="submit">Add Building</button>
+      <button type="submit" className="btn-primary">Add Building</button>
     </form>
   );
 };

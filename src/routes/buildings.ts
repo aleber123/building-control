@@ -66,4 +66,37 @@ router.delete('/:id', (req: Request, res: Response) => {
   });
 });
 
+// PATCH /:id/command - Update building status or temperature
+router.patch('/:id/command', (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const { status, temperature } = req.body;
+
+  // Build the query dynamically based on what is provided
+  const updates: string[] = [];
+  const values: any[] = [];
+
+  if (status !== undefined) {
+    updates.push('status = ?');
+    values.push(status);
+  }
+  if (temperature !== undefined) {
+    updates.push('temperature = ?');
+    values.push(temperature);
+  }
+  values.push(id); // ID is always the last value
+
+  const query = `UPDATE buildings SET ${updates.join(', ')} WHERE id = ?`;
+
+  connection.query(query, values, (err: unknown, results: any) => {
+    if (err) {
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ error: 'Building not found' });
+    }
+    res.json({ message: `Building with id ${id} updated` });
+  });
+});
+
+
 export default router;
