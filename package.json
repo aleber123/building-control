@@ -1,0 +1,31 @@
+{
+  "name": "building-control",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@types/react": "^18.3.12",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^14.14.31",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "nodemon": "^2.0.7",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^5.6.3"
+  }
+}
