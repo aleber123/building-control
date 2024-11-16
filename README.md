@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Frontend-React-blue">
   <img src="https://img.shields.io/badge/Backend-Node.js-green">
   <img src="https://img.shields.io/badge/Database-MySQL-yellow">
+  <img src="https://img.shields.io/badge/License-MIT-lightgrey">
 </p>
 
 <p align="center">A full-stack application to manage building data, including adding, editing, and deleting buildings. The backend supports CRUD operations and stores data in a MySQL database, while the frontend provides a sleek UI for user interactions.</p>
@@ -86,6 +87,8 @@ npm run dev
 
 <h3>Base URL: <code>http://localhost:3001</code></h3>
 
+<p>This application implements a <strong>REST API</strong> to handle CRUD operations for buildings. The RESTful design follows resource-oriented principles for efficient data handling.</p>
+
 <table>
   <tr>
     <th>Method</th>
@@ -120,24 +123,6 @@ npm run dev
 
 <p><strong>Run Unit Tests:</strong></p>
 <pre><code>npx jest</code></pre>
-
----
-
-<h2>🌍 Deployment</h2>
-
-<h3>Frontend Deployment</h3>
-<p>Deploy the frontend using platforms like:</p>
-<ul>
-  <li><a href="https://vercel.com/" target="_blank">Vercel</a></li>
-  <li><a href="https://www.netlify.com/" target="_blank">Netlify</a></li>
-</ul>
-
-<h3>Backend Deployment</h3>
-<p>Deploy the backend using platforms like:</p>
-<ul>
-  <li><a href="https://www.heroku.com/" target="_blank">Heroku</a></li>
-  <li><a href="https://aws.amazon.com/" target="_blank">AWS</a></li>
-</ul>
 
 ---
 
