@@ -54,32 +54,24 @@
 </ul>
 
 <h3>Installation</h3>
-<ol>
-  <li><strong>Clone the Repository</strong>
-  <pre><code>git clone https://github.com/aleber123/building-control.git
-cd building-control</code></pre></li>
+<h3>Clone the Repository</h3>
+<pre><code>git clone https://github.com/aleber123/building-control.git
+cd building-control</code></pre>
 
-  <li><strong>Install Dependencies</strong>
-  <pre><code># Install root dependencies
-npm install
+<h3>Install Dependencies</h3>
+<pre><code>npm install
+cd building-control-backend && npm install
+cd ../building-control-frontend && npm install</code></pre>
 
-# Install backend dependencies
-cd building-control-backend
-npm install
-
-# Install frontend dependencies
-cd ../building-control-frontend
-npm install</code></pre></li>
-
-  <li><strong>Configure Environment Variables</strong>
-  <p>Create a <code>.env</code> file in the backend directory with:</p>
-  <pre><code>DB_HOST=localhost
+<h3>Configure Environment Variables</h3>
+<p>Create a <code>.env</code> file in the backend directory with:</p>
+<pre><code>DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_password
-DB_DATABASE=building_control</code></pre></li>
+DB_DATABASE=building_control</code></pre>
 
-  <li><strong>Set Up MySQL Database</strong>
-  <pre><code>CREATE DATABASE building_control;
+<h3>Set Up MySQL Database</h3>
+<pre><code>CREATE DATABASE building_control;
 
 USE building_control;
 
@@ -89,15 +81,11 @@ CREATE TABLE buildings (
   temperature FLOAT,
   location VARCHAR(255),
   status VARCHAR(50)
-);</code></pre></li>
+);</code></pre>
 
-  <li><strong>Start the Applications</strong>
-  <pre><code># Start backend (from building-control-backend directory)
-npm run dev
-
-# Start frontend (from building-control-frontend directory)
-npm start</code></pre></li>
-</ol>
+<h3>Start the Applications</h3>
+<pre><code>cd building-control-backend && npm run dev
+cd ../building-control-frontend && npm start</code></pre>
 
 ---
 
@@ -182,3 +170,9 @@ npm run test:watch</code></pre>
 
 <img src="./assets/1.png" alt="Screenshot 1" width="800">
 <p align="center">Figure 1: Screenshot 1 description</p>
+
+<img src="./assets/2.png" alt="Screenshot 2" width="800">
+<p align="center">Figure 2: Screenshot 2 description</p>
+
+<img src="./assets/3.png" alt="Screenshot 3" width="800">
+<p align="center">Figure 3: Screenshot 3 description</p>
