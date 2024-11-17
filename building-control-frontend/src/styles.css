@@ -340,14 +340,27 @@ form input {
 .switch-container {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin: 10px 0;
+    gap: 12px;
+    margin: 16px 0;
+    justify-content: flex-start;
+    padding-left: 0;
 }
 
-/* Text box for status */
+.building-card .switch-container {
+    padding-left: 10px;
+    margin: 16px 0;
+}
+
+.toggle-box {
+    display: flex;
+    align-items: center;
+    height: 34px;
+}
+
+/* Status Box */
 .status-box {
     width: 80px;
-    padding: 5px 10px;
+    padding: 8px 10px;
     border: 1px solid var(--border-color);
     border-radius: 15px;
     text-align: center;
@@ -355,14 +368,20 @@ form input {
     font-weight: bold;
     color: var(--text-color);
     font-family: 'Lexend', sans-serif;
+    height: 18px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Toggle Switch */
 .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 24px;
+    width: 60px;
+    height: 34px;
+    margin: 0;
 }
 
 .switch input {
@@ -379,34 +398,26 @@ form input {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 24px;
+    transition: .4s;
+    border-radius: 34px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
+    height: 26px;
+    width: 26px;
     left: 4px;
-    bottom: 3px;
+    bottom: 4px;
     background-color: white;
-    transition: 0.4s;
+    transition: .4s;
     border-radius: 50%;
 }
 
-.switch input:checked + .slider {
-    background-color: var(--primary-color);
+input:checked + .slider {
+    background-color: var(--success-color);
 }
 
-.switch input:checked + .slider:before {
+input:checked + .slider:before {
     transform: translateX(26px);
-}
-
-/* Toggle Box */
-.toggle-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
 }
