@@ -142,8 +142,3 @@ npm test
 # Backend tests
 cd building-control-backend
 npm test</code></pre>
-
----
-
-<h2>📫 Support</h2>
-<p>If you encounter any issues, please open an issue on GitHub or contact the maintainers.</p>
