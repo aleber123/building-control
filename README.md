@@ -53,13 +53,29 @@
 <ol>
   <li><strong>Clone the Repository</strong></li>
   <pre><code>git clone https://github.com/aleber123/building-control.git
-cd building-control
-</code></pre>
-  <li><strong>Install Backend Dependencies</strong></li>
-  <pre><code>npm install</code></pre>
+cd building-control</code></pre>
+
+  <li><strong>Install Dependencies</strong></li>
+  <pre><code># Install root dependencies
+npm install
+
+# Install backend dependencies
+cd building-control-backend
+npm install
+
+# Install frontend dependencies
+cd ../building-control-frontend
+npm install</code></pre>
+
+  <li><strong>Configure Environment Variables</strong></li>
+  <p>Create a <code>.env</code> file in the backend directory with the following variables:</p>
+  <pre><code>DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_DATABASE=building_control</code></pre>
+
   <li><strong>Set Up MySQL Database</strong></li>
-  <pre><code>
-CREATE DATABASE building_control;
+  <pre><code>CREATE DATABASE building_control;
 
 USE building_control;
 
@@ -69,16 +85,40 @@ CREATE TABLE buildings (
   temperature FLOAT,
   location VARCHAR(255),
   status VARCHAR(50)
-);
-</code></pre>
-  <li><strong>Start the Backend Server</strong></li>
-  <pre><code>npm run dev</code></pre>
-  <li><strong>Set Up and Start the Frontend</strong></li>
-  <pre><code>cd building-control-frontend
-npm install
+);</code></pre>
+
+  <li><strong>Start the Applications</strong></li>
+  <pre><code># Start backend (from building-control-backend directory)
 npm run dev
-</code></pre>
+
+# Start frontend (from building-control-frontend directory)
+npm start</code></pre>
 </ol>
+
+---
+
+<h2>🧪 Testing</h2>
+
+<h3>Running Tests</h3>
+<p>The project uses Jest for both frontend and backend testing. You can run tests using the following commands from the root directory:</p>
+
+<pre><code># Run all tests (frontend and backend)
+npm test
+
+# Run only backend tests
+npm run test:backend
+
+# Run only frontend tests
+npm run test:frontend
+
+# Run tests in watch mode
+npm run test:watch</code></pre>
+
+<h3>Test Structure</h3>
+<ul>
+  <li><strong>Backend Tests:</strong> Located in <code>building-control-backend/src/tests/</code></li>
+  <li><strong>Frontend Tests:</strong> Located in <code>building-control-frontend/src/tests/</code></li>
+</ul>
 
 ---
 
@@ -115,71 +155,6 @@ npm run dev
     <td>Delete a building by ID</td>
   </tr>
 </table>
-
----
-
-<h2>🧪 Testing</h2>
-
-<p><strong>Run Unit Tests:</strong></p>
-<pre><code>npx jest</code></pre>
-
-<h3>Manual API Testing with Postman</h3>
-<p>Postman is used to manually test the API endpoints. Follow these steps to test the API:</p>
-<ol>
-  <li>Download and install <a href="https://www.postman.com/downloads/" target="_blank">Postman</a>.</li>
-  <li>Start the backend server: <code>npm run dev</code>.</li>
-  <li>Open Postman and set the <strong>Base URL</strong> to <code>http://localhost:3001</code>.</li>
-  <li>Use the following endpoints to test the API:</li>
-</ol>
-
-<table>
-  <tr>
-    <th>Method</th>
-    <th>Endpoint</th>
-    <th>Description</th>
-    <th>Body (JSON)</th>
-  </tr>
-  <tr>
-    <td>GET</td>
-    <td><code>/buildings</code></td>
-    <td>Fetch all buildings</td>
-    <td><em>None</em></td>
-  </tr>
-  <tr>
-    <td>POST</td>
-    <td><code>/buildings</code></td>
-    <td>Create a new building</td>
-    <td>
-      <pre><code>{
-  "name": "Building Name",
-  "temperature": 22.5,
-  "location": "Main Street",
-  "status": "Active"
-}</code></pre>
-    </td>
-  </tr>
-  <tr>
-    <td>PUT</td>
-    <td><code>/buildings/:id</code></td>
-    <td>Update a building by ID</td>
-    <td>
-      <pre><code>{
-  "name": "Updated Building",
-  "temperature": 25,
-  "location": "Updated Location",
-  "status": "Inactive"
-}</code></pre>
-    </td>
-  </tr>
-  <tr>
-    <td>DELETE</td>
-    <td><code>/buildings/:id</code></td>
-    <td>Delete a building by ID</td>
-    <td><em>None</em></td>
-  </tr>
-</table>
-
-<p>Test each endpoint by setting the request type (GET, POST, PUT, DELETE), providing any necessary data, and clicking "Send" in Postman.</p>
 
 ---
 
