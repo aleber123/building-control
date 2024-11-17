@@ -1,0 +1,73 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Logs
+logs
+*.log
+log/
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Testing
+/coverage/
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Miscellaneous
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+*.iml
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# System files
+*.bak
+*.orig
+*.log
+*.log.*
+*.gz
+*.lock
+
+# Linting
+.eslintcache
+
+# IDE
+.vscode/
+*.code-workspace
+
+# Production
+/server/logs/
+
+# Ignore specific React files
+*.cache
+*.map
