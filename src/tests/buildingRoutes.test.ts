@@ -1,51 +1,72 @@
 import request from 'supertest';
-import app from '../index'; // Import your Express app from index.ts
+import app from '../index';
+import connection from '../config/database';
 
 describe('Building Routes', () => {
-  
-  // Test the GET /buildings endpoint
+  let createdBuildingId: number;
+
+  // Set up the database state before each test
+  beforeEach(async () => {
+    // Clear all data
+    await connection.promise().query('DELETE FROM buildings');
+
+    // Insert a test building
+    const [result]: any = await connection.promise().query(
+      'INSERT INTO buildings (name, temperature, location, status) VALUES (?, ?, ?, ?)',
+      ['Initial Test Building', 22.5, 'Initial Location', 'Active']
+    );
+    createdBuildingId = result.insertId;
+  });
+
+  // Close the database connection after all tests
+  afterAll(async () => {
+    await connection.promise().end();
+  });
+
   it('should fetch all buildings', async () => {
     const response = await request(app).get('/buildings');
     expect(response.status).toBe(200);
-    expect(Array.isArray(response.body)).toBe(true); // Assuming the response is an array
+    expect(Array.isArray(response.body)).toBe(true);
   });
 
-  // Test the POST /buildings endpoint
   it('should create a new building', async () => {
     const newBuilding = {
-      name: 'Test Building',
-      temperature: 22.5,
-      location: 'Main St',
-      status: 'Active'
+      name: 'New Test Building',
+      temperature: 24.5,
+      location: 'Test Location',
+      status: 'Active',
     };
+
     const response = await request(app)
       .post('/buildings')
       .send(newBuilding);
-      
+
     expect(response.status).toBe(201);
     expect(response.body).toMatchObject(newBuilding);
   });
 
-  // Test the PUT /buildings/:id endpoint
   it('should update an existing building', async () => {
-    const buildingToUpdate = {
-      name: 'Updated Building',
-      temperature: 24.0,
-      location: 'Updated St',
-      status: 'Inactive'
+    const updatedBuilding = {
+      name: 'Updated Test Building',
+      temperature: 26.0,
+      location: 'Updated Location',
+      status: 'Inactive',
     };
+
     const response = await request(app)
-      .put('/buildings/1') // Use a valid building ID here
-      .send(buildingToUpdate);
-    
+      .put(`/buildings/${createdBuildingId}`)
+      .send(updatedBuilding);
+
     expect(response.status).toBe(200);
-    expect(response.body).toMatchObject(buildingToUpdate);
+    expect(response.body).toMatchObject(updatedBuilding);
   });
 
-  // Test the DELETE /buildings/:id endpoint
   it('should delete an existing building', async () => {
-    const response = await request(app).delete('/buildings/1'); // Use a valid building ID here
+    const response = await request(app).delete(`/buildings/${createdBuildingId}`);
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('message', `Building with id 1 deleted`);
+    expect(response.body).toHaveProperty(
+      'message',
+      `Building with id ${createdBuildingId} deleted`
+    );
   });
 });
