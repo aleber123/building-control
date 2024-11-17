@@ -1,6 +1,27 @@
 {
+  "name": "building-control",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "building-control-frontend",
+    "building-control-backend"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:backend": "jest --selectProjects backend",
+    "test:frontend": "jest --selectProjects frontend"
+  },
   "dependencies": {
     "dotenv": "^16.4.5",
     "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.2",
+    "@types/jest": "^29.5.12",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jsdom": "^24.0.0",
+    "ts-jest": "^29.1.2"
   }
 }
