@@ -14,6 +14,16 @@ router.get('/', (req: Request, res: Response) => {
   });
 });
 
+router.get('/:id', (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  connection.query('SELECT * FROM buildings WHERE id = ?', (err: unknown, results: RowDataPacket[]) => {
+    if (err) {
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.json(results);
+  });
+});
+
 // POST / - Create a new building in MySQL
 router.post('/', (req: Request, res: Response) => {
   const { name, temperature, location, status } = req.body;
