@@ -1,21 +1,38 @@
+/* Variables */
+:root {
+  --primary-color: #211057;
+  --primary-hover: #1a0846;
+  --danger-color: #ff4d4d;
+  --danger-hover: #cc0000;
+  --success-color: #28a745;
+  --success-hover: #218838;
+  --warning-color: #ffc107;
+  --warning-hover: #e0a800;
+  --text-color: #333;
+  --border-color: #ddd;
+  --bg-color: #f4f4f4;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 /* General Reset */
 body {
     font-family: 'Open Sans', Arial, sans-serif; /* Consistent font across the app */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 /* Page Header */
 h1 {
     text-align: center;
-    color: #211057; /* Updated to match button color */
+    color: var(--primary-color);
     margin: 20px 0;
 }
 
 title {
-    color: #211057; /* Updated to match button color */
+    color: var(--primary-color);
 }
 
 /* Buttons */
@@ -36,22 +53,22 @@ button:hover {
 
 /* Primary Button */
 .btn-primary {
-    background-color: #211057; /* Primary button color */
-    color: white; /* White text */
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .btn-primary:hover {
-    background-color: #1a0846; /* Slightly darker shade for hover */
+    background-color: var(--primary-hover);
 }
 
 /* Secondary Button */
 .btn-secondary {
-    background-color: #ff4d4d; /* Red for cancel/delete buttons */
+    background-color: var(--danger-color);
     color: white;
 }
 
 .btn-secondary:hover {
-    background-color: #cc0000; /* Darker red for hover */
+    background-color: var(--danger-hover);
 }
 
 /* Forms */
@@ -60,7 +77,7 @@ form {
     margin: 20px auto;
     padding: 20px;
     background-color: #ffffff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -75,7 +92,7 @@ form input {
     width: 96%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
@@ -90,10 +107,10 @@ form input {
 
 .building-card {
     background-color: #ffffff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
     width: 250px;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -101,12 +118,12 @@ form input {
 
 .building-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .building-card h3 {
     margin-bottom: 8px;
-    color: #211057; /* Match the primary button color */
+    color: var(--primary-color);
 }
 
 .building-card p {
@@ -131,21 +148,64 @@ form input {
 }
 
 .form-buttons .btn-primary {
-    background-color: #211057;
+    background-color: var(--primary-color);
     color: white;
 }
 
 .form-buttons .btn-primary:hover {
-    background-color: #1a0846;
+    background-color: var(--primary-hover);
 }
 
 .form-buttons .btn-secondary {
-    background-color: #ff4d4d;
+    background-color: var(--danger-color);
     color: white;
 }
 
 .form-buttons .btn-secondary:hover {
-    background-color: #cc0000;
+    background-color: var(--danger-hover);
+}
+
+/* Temperature Controls */
+.temperature-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.temperature-controls input {
+    width: 100%;
+    max-width: 150px;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+.temperature-controls button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-sizing: border-box;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.temperature-controls button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
 }
 
 /* Status and Temperature Section */
@@ -163,7 +223,7 @@ form input {
     max-width: 150px;
     padding: 8px;
     margin: 0;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     text-align: center;
     font-size: 0.9em;
@@ -171,73 +231,30 @@ form input {
 
 /* Status and Temperature Buttons */
 .status-temperature .btn-active {
-    background-color: #28a745; /* Green for active status */
+    background-color: var(--success-color);
     color: white;
 }
 
 .status-temperature .btn-active:hover {
-    background-color: #218838;
+    background-color: var(--success-hover);
 }
 
 .status-temperature .btn-inactive {
-    background-color: #ffc107; /* Yellow for inactive status */
-    color: #333;
+    background-color: var(--warning-color);
+    color: var(--text-color);
 }
 
 .status-temperature .btn-inactive:hover {
-    background-color: #e0a800;
+    background-color: var(--warning-hover);
 }
 
 .status-temperature .btn-update {
-    background-color: #211057;
+    background-color: var(--primary-color);
     color: white;
 }
 
 .status-temperature .btn-update:hover {
-    background-color: #1a0846;
-}
-
-/* Temperature Controls */
-.temperature-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
-    justify-content: center;
-}
-
-.temperature-controls input {
-    width: 100%;
-    max-width: 150px;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 0.9em;
-    box-sizing: border-box;
-}
-
-.temperature-controls button {
-    background-color: #211057;
-    color: white;
-    padding: 0 15px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 0.9em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-sizing: border-box;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.temperature-controls button:hover {
-    background-color: #1a0846;
-    transform: translateY(-2px);
+    background-color: var(--primary-hover);
 }
 
 /* Status Controls */
@@ -245,11 +262,11 @@ form input {
     display: flex;
     gap: 12px;
     justify-content: center;
-    margin-top: 10px; /* Space above buttons */
+    margin-top: 10px;
 }
 
 .status-controls .btn-active {
-    background-color: #28a745; /* Green for active status */
+    background-color: var(--success-color);
     color: white;
     padding: 10px 15px;
     border: none;
@@ -260,13 +277,13 @@ form input {
 }
 
 .status-controls .btn-active:hover {
-    background-color: #218838; /* Darker green */
+    background-color: var(--success-hover);
     transform: translateY(-2px);
 }
 
 .status-controls .btn-inactive {
-    background-color: #ffc107; /* Yellow for inactive status */
-    color: #333;
+    background-color: var(--warning-color);
+    color: var(--text-color);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -276,7 +293,7 @@ form input {
 }
 
 .status-controls .btn-inactive:hover {
-    background-color: #e0a800; /* Darker yellow */
+    background-color: var(--warning-hover);
     transform: translateY(-2px);
 }
 
@@ -284,27 +301,37 @@ form input {
 .switch-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 10px;
-  }
-  
-  /* The Switch Wrapper */
-  .switch {
+    gap: 16px;
+    margin: 10px 0;
+}
+
+/* Text box for status */
+.status-box {
+    width: 80px;
+    padding: 5px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Toggle Switch */
+.switch {
     position: relative;
     display: inline-block;
     width: 50px;
     height: 24px;
-  }
-  
-  /* Hide the Default Checkbox */
-  .switch input {
+}
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The Slider */
-  .slider {
+}
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -314,15 +341,9 @@ form input {
     background-color: #ccc;
     transition: 0.4s;
     border-radius: 24px;
-  }
-  
-  /* Slider Color when Checked */
-  .switch input:checked + .slider {
-    background-color: #211057; /* Green for Active */
-  }
-  
-  /* The Knob */
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 18px;
@@ -332,53 +353,20 @@ form input {
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
-  }
-  
-  /* Move Knob when Checked */
-  .switch input:checked + .slider:before {
+}
+
+.switch input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+.switch input:checked + .slider:before {
     transform: translateX(26px);
-  }
-  
-  /* Switch Container */
-.switch-container {
-    display: flex;
-    align-items: center;
-    gap: 50px; /* Increases space between text and toggle button */
-    margin-top: 10px;
-  }
-  
-  /* Optional: Style for the status text */
-  .switch-container span {
-    font-size: 1em;
-    font-weight: bold;
-    color: #333; /* Match overall text color */
-  }
-  
-  /* Switch Container */
-.switch-container {
-    display: flex;
-    align-items: center;
-    gap: 16px; /* Adds space between the boxes */
-    margin: 10px 0;
-  }
-  
-  /* Text box for status */
-  .status-box {
-    width: 80px; /* Fixed width to prevent jumping */
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-    background-color: #f9f9f9;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Toggle Switch Box */
-  .toggle-box {
+}
+
+/* Toggle Box */
+.toggle-box {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
-  }
-  
+}
