@@ -3,9 +3,9 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "building-control-backend/src",
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*"]
+  "include": ["building-control-backend/src/**/*"]
 }

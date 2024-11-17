@@ -1,4 +1,4 @@
-import app from './src/index';
+import app from './building-control-backend/src/index';
 
 const PORT = 3001;
 app.listen(PORT, () => {
