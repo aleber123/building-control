@@ -17,16 +17,20 @@
 
 /* General Reset */
 body {
-    font-family: 'Open Sans', Arial, sans-serif; /* Consistent font across the app */
+    font-family: 'Lexend', sans-serif; /* Consistent font across the app */
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Page Header */
-h1 {
+h1, h2, h3, h4, h5, h6 {
     text-align: center;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 500;
     color: var(--primary-color);
     margin: 20px 0;
 }
@@ -39,11 +43,11 @@ title {
 button {
     padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 15px;
     font-size: 0.9em;
     cursor: pointer;
-    font-weight: bold;
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 500;
+    font-family: 'Lexend', sans-serif;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -78,7 +82,7 @@ form {
     padding: 20px;
     background-color: #ffffff;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -86,6 +90,7 @@ form label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+    font-family: 'Lexend', sans-serif;
 }
 
 form input {
@@ -94,6 +99,7 @@ form input {
     margin-bottom: 15px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
+    font-family: 'Lexend', sans-serif;
 }
 
 /* Building List */
@@ -108,7 +114,7 @@ form input {
 .building-card {
     background-color: #ffffff;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 15px;
     padding: 16px;
     box-shadow: var(--card-shadow);
     width: 250px;
@@ -124,11 +130,14 @@ form input {
 .building-card h3 {
     margin-bottom: 8px;
     color: var(--primary-color);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 500;
 }
 
 .building-card p {
     margin: 4px 0;
     color: #555;
+    font-family: 'Lexend', sans-serif;
 }
 
 /* Button Group */
@@ -174,7 +183,7 @@ form input {
     justify-content: center;
 }
 
-.temperature-controls input {
+.temperature-controls input[type="number"] {
     width: 100%;
     max-width: 150px;
     padding: 10px 15px;
@@ -183,24 +192,39 @@ form input {
     text-align: center;
     font-size: 0.9em;
     box-sizing: border-box;
+    font-family: 'Lexend', sans-serif;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    padding-right: 5px; /* Reduce right padding to accommodate arrows */
+}
+
+.temperature-controls input[type="number"]::-webkit-inner-spin-button,
+.temperature-controls input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 30px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
 }
 
 .temperature-controls button {
     background-color: var(--primary-color);
     color: white;
     padding: 0 15px;
-    border-radius: 4px;
+    border-radius: 15px;
     border: 1px solid var(--border-color);
     font-size: 0.9em;
-    font-weight: bold;
+    font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease;
     box-sizing: border-box;
     height: 42px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-family: 'Lexend', sans-serif;
+    white-space: nowrap;
 }
 
 .temperature-controls button:hover {
@@ -218,7 +242,7 @@ form input {
     align-items: center;
 }
 
-.status-temperature input {
+.status-temperature input[type="number"] {
     width: 100%;
     max-width: 150px;
     padding: 8px;
@@ -227,6 +251,19 @@ form input {
     border-radius: 4px;
     text-align: center;
     font-size: 0.9em;
+    font-family: 'Lexend', sans-serif;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    padding-right: 5px; /* Reduce right padding to accommodate arrows */
+}
+
+.status-temperature input[type="number"]::-webkit-inner-spin-button,
+.status-temperature input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 30px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
 }
 
 /* Status and Temperature Buttons */
@@ -270,10 +307,11 @@ form input {
     color: white;
     padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: 'Lexend', sans-serif;
 }
 
 .status-controls .btn-active:hover {
@@ -286,10 +324,11 @@ form input {
     color: var(--text-color);
     padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: 'Lexend', sans-serif;
 }
 
 .status-controls .btn-inactive:hover {
@@ -310,11 +349,12 @@ form input {
     width: 80px;
     padding: 5px 10px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 15px;
     text-align: center;
     background-color: #f9f9f9;
     font-weight: bold;
     color: var(--text-color);
+    font-family: 'Lexend', sans-serif;
 }
 
 /* Toggle Switch */

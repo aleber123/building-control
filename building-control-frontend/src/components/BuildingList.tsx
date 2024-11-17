@@ -54,7 +54,7 @@ const BuildingList: React.FC<BuildingListProps> = ({ buildings, setBuildings, on
               className="btn-update"
               onClick={() => handleTemperatureUpdate(building)}
             >
-              Set Temp
+              Set Temperature
             </button>
           </div>
           <div className="switch-container">
