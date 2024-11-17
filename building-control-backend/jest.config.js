@@ -1,7 +1,12 @@
-// jest.config.js
-module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'node', // Use 'jsdom' if you are testing frontend code with DOM
-    testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'], // Match test files
-  };
-  
+export default {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest', {
+      tsconfig: 'tsconfig.json'
+    }]
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  testTimeout: 10000,
+  setupFilesAfterEnv: ['./jest.setup.ts']
+};

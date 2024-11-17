@@ -3,9 +3,12 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "building-control-backend/src",
+    "rootDir": "./src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["jest"],
+    "resolveJsonModule": true
   },
-  "include": ["building-control-backend/src/**/*"]
+  "include": ["src/**/*", "jest.setup.ts"],
+  "exclude": ["node_modules", "dist"]
 }
