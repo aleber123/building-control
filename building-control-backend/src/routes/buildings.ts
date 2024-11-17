@@ -1,112 +1,132 @@
 import { Router, Request, Response } from 'express';
-import connection from '../config/database';
-import { FieldPacket, RowDataPacket } from 'mysql2'; // Import necessary types
+import db from '../config/database';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 
 const router = Router();
 
-// GET / - Retrieve all buildings from MySQL
-router.get('/', (req: Request, res: Response) => {
-  connection.query('SELECT * FROM buildings', (err: unknown, results: RowDataPacket[]) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-    res.json(results);
-  });
+// GET / - Retrieve all buildings
+router.get('/', async (req: Request, res: Response) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM buildings');
+    res.json(rows);
+  } catch (err) {
+    console.error('Error fetching buildings:', err);
+    res.status(500).json({ error: 'Database error', details: err });
+  }
 });
 
-router.get('/:id', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  connection.query('SELECT * FROM buildings WHERE id = ?', (err: unknown, results: RowDataPacket[]) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-    res.json(results);
-  });
+router.get('/:id', async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const [rows] = await db.query('SELECT * FROM buildings WHERE id = ?', [id]);
+    res.json(rows);
+  } catch (err) {
+    console.error('Error fetching building:', err);
+    res.status(500).json({ error: 'Database error', details: err });
+  }
 });
 
-// POST / - Create a new building in MySQL
-router.post('/', (req: Request, res: Response) => {
-  const { name, temperature, location, status } = req.body;
-  const query = 'INSERT INTO buildings (name, temperature, location, status) VALUES (?, ?, ?, ?)';
+// POST / - Create a new building
+router.post('/', async (req: Request, res: Response) => {
+  try {
+    const { name, temperature, location, status } = req.body;
+    console.log('Creating building with data:', { name, temperature, location, status });
 
-  connection.query(query, [name, temperature, location, status], (err: unknown, results: any) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
+    const [result] = await db.query<ResultSetHeader>(
+      'INSERT INTO buildings (name, temperature, location, status) VALUES (?, ?, ?, ?)',
+      [name, temperature, location, status]
+    );
+
+    console.log('Building created successfully:', result);
+
     res.status(201).json({
-      id: results.insertId,
+      id: result.insertId,
       name,
       temperature,
       location,
       status,
     });
-  });
+  } catch (err) {
+    console.error('Error creating building:', err);
+    res.status(500).json({ error: 'Database error', details: err });
+  }
 });
 
-// PUT /:id - Update an existing building in MySQL
-router.put('/:id', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const { name, temperature, location, status } = req.body;
-  const query = 'UPDATE buildings SET name = ?, temperature = ?, location = ?, status = ? WHERE id = ?';
+// PUT /:id - Update a building
+router.put('/:id', async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { name, temperature, location, status } = req.body;
 
-  connection.query(query, [name, temperature, location, status, id], (err: unknown, results: any) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-    if (results.affectedRows === 0) {
+    const [result] = await db.query<ResultSetHeader>(
+      'UPDATE buildings SET name = ?, temperature = ?, location = ?, status = ? WHERE id = ?',
+      [name, temperature, location, status, id]
+    );
+
+    if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Building not found' });
     }
+
     res.json({ id, name, temperature, location, status });
-  });
+  } catch (err) {
+    console.error('Error updating building:', err);
+    res.status(500).json({ error: 'Database error', details: err });
+  }
 });
 
-// DELETE /:id - Delete a building from MySQL
-router.delete('/:id', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const query = 'DELETE FROM buildings WHERE id = ?';
+// DELETE /:id - Delete a building
+router.delete('/:id', async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const [result] = await db.query<ResultSetHeader>(
+      'DELETE FROM buildings WHERE id = ?',
+      [id]
+    );
 
-  connection.query(query, [id], (err: unknown, results: any) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-    if (results.affectedRows === 0) {
+    if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Building not found' });
     }
+
     res.json({ message: `Building with id ${id} deleted` });
-  });
+  } catch (err) {
+    console.error('Error deleting building:', err);
+    res.status(500).json({ error: 'Database error', details: err });
+  }
 });
 
 // PATCH /:id/command - Update building status or temperature
-router.patch('/:id/command', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const { status, temperature } = req.body;
+router.patch('/:id/command', async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { status, temperature } = req.body;
 
-  // Build the query dynamically based on what is provided
-  const updates: string[] = [];
-  const values: any[] = [];
+    // Build the query dynamically based on what is provided
+    const updates: string[] = [];
+    const values: any[] = [];
 
-  if (status !== undefined) {
-    updates.push('status = ?');
-    values.push(status);
-  }
-  if (temperature !== undefined) {
-    updates.push('temperature = ?');
-    values.push(temperature);
-  }
-  values.push(id); // ID is always the last value
-
-  const query = `UPDATE buildings SET ${updates.join(', ')} WHERE id = ?`;
-
-  connection.query(query, values, (err: unknown, results: any) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
+    if (status !== undefined) {
+      updates.push('status = ?');
+      values.push(status);
     }
-    if (results.affectedRows === 0) {
+    if (temperature !== undefined) {
+      updates.push('temperature = ?');
+      values.push(temperature);
+    }
+    values.push(id); // ID is always the last value
+
+    const query = `UPDATE buildings SET ${updates.join(', ')} WHERE id = ?`;
+
+    const [result] = await db.query<ResultSetHeader>(query, values);
+
+    if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Building not found' });
     }
-    res.json({ message: `Building with id ${id} updated` });
-  });
-});
 
+    res.json({ message: `Building with id ${id} updated` });
+  } catch (err) {
+    console.error('Error updating building:', err);
+    res.status(500).json({ error: 'Database error', details: err });
+  }
+});
 
 export default router;
