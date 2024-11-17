@@ -2,10 +2,10 @@
   "name": "building-control",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "nodemon",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
     "test": "jest"
   },
