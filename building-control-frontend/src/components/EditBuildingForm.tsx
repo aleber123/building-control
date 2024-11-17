@@ -12,13 +12,17 @@ const EditBuildingForm: React.FC<EditBuildingFormProps> = ({ building, onBuildin
   const [name, setName] = useState(building.name);
   const [temperature, setTemperature] = useState(building.temperature);
   const [location, setLocation] = useState(building.location || '');
-  const [status, setStatus] = useState(building.status || '');
+  const [status, setStatus] = useState<'Active' | 'Inactive'>(building.status as 'Active' | 'Inactive');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const updatedBuilding = { ...building, name, temperature, location, status };
     await updateBuilding(building.id, updatedBuilding);
     onBuildingUpdated(updatedBuilding);
+  };
+
+  const toggleStatus = () => {
+    setStatus((prevStatus) => (prevStatus === 'Active' ? 'Inactive' : 'Active'));
   };
 
   return (
@@ -50,11 +54,19 @@ const EditBuildingForm: React.FC<EditBuildingFormProps> = ({ building, onBuildin
       </label>
       <label>
         Status:
-        <input
-          type="text"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        />
+        <div className="switch-container">
+          <div className="status-box">{status}</div>
+          <div className="toggle-box">
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={status === 'Active'}
+                onChange={toggleStatus}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+        </div>
       </label>
       <div className="form-buttons">
         <button type="submit" className="btn-primary">Save Changes</button>

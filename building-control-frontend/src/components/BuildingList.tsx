@@ -24,22 +24,20 @@ const BuildingList: React.FC<BuildingListProps> = ({ buildings, setBuildings, on
     setTemperatureInputs((prev) => ({ ...prev, [building.id]: newTemperature }));
   };
 
+  const handleStatusToggle = async (building: Building) => {
+    const updatedStatus = building.status === 'Active' ? 'Inactive' : 'Active';
+    const updatedBuilding = { ...building, status: updatedStatus };
+    await updateBuilding(building.id, updatedBuilding);
+    setBuildings(buildings.map((b) => (b.id === building.id ? updatedBuilding : b)));
+  };
+
   return (
     <div className="building-list">
       {buildings.map((building) => (
         <div key={building.id} className="building-card">
           <h3>{building.name}</h3>
           <p>Location: {building.location}</p>
-          <p>Status: {building.status}</p>
           <p>Current Temperature: {building.temperature}°C</p>
-          <div className="button-group">
-            <button className="btn-primary" onClick={() => onEdit(building)}>
-              Edit
-            </button>
-            <button className="btn-secondary" onClick={() => handleDelete(building.id)}>
-              Delete
-            </button>
-          </div>
           <div className="temperature-controls">
             <input
               type="number"
@@ -57,6 +55,27 @@ const BuildingList: React.FC<BuildingListProps> = ({ buildings, setBuildings, on
               onClick={() => handleTemperatureUpdate(building)}
             >
               Set Temp
+            </button>
+          </div>
+          <div className="switch-container">
+            <div className="status-box">{building.status}</div>
+            <div className="toggle-box">
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  checked={building.status === 'Active'}
+                  onChange={() => handleStatusToggle(building)}
+                />
+                <span className="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div className="button-group">
+            <button className="btn-primary" onClick={() => onEdit(building)}>
+              Edit
+            </button>
+            <button className="btn-secondary" onClick={() => handleDelete(building.id)}>
+              Delete
             </button>
           </div>
         </div>

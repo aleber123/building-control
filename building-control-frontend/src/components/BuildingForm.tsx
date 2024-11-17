@@ -10,7 +10,7 @@ const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
   const [name, setName] = useState('');
   const [temperature, setTemperature] = useState<number | ''>('');
   const [location, setLocation] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState<'Active' | 'Inactive'>('Active'); // Default to 'Active'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +20,11 @@ const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
     setName('');
     setTemperature('');
     setLocation('');
-    setStatus('');
+    setStatus('Active'); // Reset to default
+  };
+
+  const toggleStatus = () => {
+    setStatus((prevStatus) => (prevStatus === 'Active' ? 'Inactive' : 'Active'));
   };
 
   return (
@@ -44,7 +48,19 @@ const BuildingForm: React.FC<BuildingFormProps> = ({ onBuildingAdded }) => {
       </label>
       <label>
         Status:
-        <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} />
+        <div className="switch-container">
+          <div className="status-box">{status}</div>
+          <div className="toggle-box">
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={status === 'Active'}
+                onChange={toggleStatus}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+        </div>
       </label>
       <button type="submit" className="btn-primary">Add Building</button>
     </form>
