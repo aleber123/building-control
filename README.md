@@ -184,5 +184,13 @@ npm run dev
 ---
 
 <h2>🎨 Preview</h2>
-<p>Replace the placeholder image below with an actual screenshot of your application:</p>
-<img src="https://via.placeholder.com/800x400.png?text=Project+Preview" alt="Project Preview">
+<p>Below are screenshots of the application:</p>
+
+<img src="./assets/1.png" alt="Screenshot 1" width="800">
+<p align="center">Figure 1: Screenshot 1 description</p>
+
+<img src="./assets/2.png" alt="Screenshot 2" width="800">
+<p align="center">Figure 2: Screenshot 2 description</p>
+
+<img src="./assets/3.png" alt="Screenshot 3" width="800">
+<p align="center">Figure 3: Screenshot 3 description</p>
